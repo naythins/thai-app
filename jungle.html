@@ -68,6 +68,16 @@ button{font-family:inherit;cursor:pointer;}
 .av{display:block;margin:0 auto;width:auto;max-width:100%;overflow:visible;height:min(44vh,350px);}
 .av.fixed{height:min(30vh,250px);}
 .av.cheat{height:270px;}
+/* labelled avatar (cheat sheet): every part named around the avatar */
+.av.labeled{width:100%;height:auto;max-height:none;}
+.av .lbl{cursor:pointer;}
+.av .lbl line{stroke:#7A5230;stroke-width:1.3;stroke-dasharray:3 2;}
+.av .lbl circle{fill:#5A3B1E;}
+.av .lbl rect{fill:#fff;stroke:#cbb27e;stroke-width:1.5;}
+.av .lbl .lr{font:800 13px 'Baloo 2',sans-serif;fill:#33291A;}
+.av .lbl .le{font:700 10px 'Baloo 2',sans-serif;fill:#7A5230;}
+.av .lbl.on rect{fill:#FFE9A8;stroke:#ffb300;stroke-width:2.5;}
+.av .lbl.on line{stroke:#ffb300;stroke-width:2;stroke-dasharray:none;}
 .av .z{cursor:pointer;}
 .av.fixed .z{pointer-events:none;}
 .av .hit{fill:transparent;stroke:none!important;}
@@ -354,7 +364,8 @@ button{font-family:inherit;cursor:pointer;}
   </ul>
   <h4>Body parts</h4>
   <div id="cheatAvatar"></div>
-  <div class="avlabel" id="cheatAvLabel">Tap a part to hear it</div>
+  <div class="avlabel" id="cheatAvLabel">Tap a part or a label to hear it</div>
+  <h4>Not shown on the avatar</h4>
   <div id="cheatBody"></div>
   <ul class="rules">
     <li>★ <b>ขา khǎa</b> covers the whole leg; <b>เท้า tháo</b> is the foot itself</li>
@@ -606,6 +617,24 @@ var COLFR=COLR.map(function(e){return e.fr;});
 
 /* ===== cute avatar for the body parts section ===== */
 var AV_SVG='<svg class="av" viewBox="0 0 200 330" role="img" aria-label="Avatar"><g stroke="#5A3B1E" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"><g class="z" data-z="neck"><rect x="87" y="134" width="26" height="28" rx="7" fill="#FFD9B8"/></g><g class="z" data-z="leg"><rect x="71" y="254" width="24" height="54" rx="10" fill="#FFD9B8"/><rect x="105" y="254" width="24" height="54" rx="10" fill="#FFD9B8"/></g><g class="z" data-z="knee"><ellipse cx="83" cy="280" rx="10" ry="9" fill="#FFC49C"/><ellipse cx="117" cy="280" rx="10" ry="9" fill="#FFC49C"/><circle class="hit" cx="83" cy="280" r="14"/><circle class="hit" cx="117" cy="280" r="14"/></g><g class="z" data-z="foot"><ellipse cx="76" cy="313" rx="19" ry="10" fill="#E4572E"/><ellipse cx="124" cy="313" rx="19" ry="10" fill="#E4572E"/></g><g class="z" data-z="arm"><rect x="40" y="174" width="20" height="66" rx="10" fill="#FFD9B8"/><rect x="140" y="174" width="20" height="66" rx="10" fill="#FFD9B8"/></g><g class="z" data-z="stomach"><rect x="66" y="208" width="68" height="32" rx="9" fill="#FFD9B8"/><circle cx="100" cy="226" r="2.2" fill="#5A3B1E" stroke="none"/></g><rect x="62" y="154" width="76" height="60" rx="16" fill="#5BA82A"/><rect x="64" y="236" width="72" height="26" rx="9" fill="#4A78B8"/><g class="z" data-z="shoulder"><circle cx="58" cy="166" r="14" fill="#5BA82A"/><circle cx="142" cy="166" r="14" fill="#5BA82A"/></g><g class="z" data-z="hand"><circle cx="50" cy="247" r="11" fill="#FFD9B8"/><circle cx="150" cy="247" r="11" fill="#FFD9B8"/></g><g class="z" data-z="finger"><ellipse cx="43" cy="262" rx="3.4" ry="6.5" fill="#FFD9B8" stroke-width="2.2"/><ellipse cx="50" cy="264" rx="3.4" ry="7" fill="#FFD9B8" stroke-width="2.2"/><ellipse cx="57" cy="262" rx="3.4" ry="6.5" fill="#FFD9B8" stroke-width="2.2"/><ellipse cx="143" cy="262" rx="3.4" ry="6.5" fill="#FFD9B8" stroke-width="2.2"/><ellipse cx="150" cy="264" rx="3.4" ry="7" fill="#FFD9B8" stroke-width="2.2"/><ellipse cx="157" cy="262" rx="3.4" ry="6.5" fill="#FFD9B8" stroke-width="2.2"/><ellipse class="hit" cx="50" cy="262" rx="14" ry="10"/><ellipse class="hit" cx="150" cy="262" rx="14" ry="10"/></g><g class="z" data-z="heart"><path d="M112 197C99 186 101 174 109 175C112 175 112 178 112 179C112 178 112 175 115 175C123 174 125 186 112 197Z" fill="#FF5A7A" stroke-width="2.4"/><circle class="hit" cx="112" cy="185" r="13"/></g><g class="z" data-z="ear"><ellipse cx="43" cy="92" rx="10" ry="13" fill="#FFD9B8"/><ellipse cx="157" cy="92" rx="10" ry="13" fill="#FFD9B8"/><ellipse cx="43" cy="93" rx="4" ry="6.5" fill="#FF9AA2" stroke="none"/><ellipse cx="157" cy="93" rx="4" ry="6.5" fill="#FF9AA2" stroke="none"/><circle class="hit" cx="43" cy="92" r="15"/><circle class="hit" cx="157" cy="92" r="15"/></g><g class="z" data-z="head"><circle cx="100" cy="88" r="56" fill="#FFD9B8"/></g><g class="z" data-z="face"><ellipse cx="100" cy="102" rx="42" ry="36" fill="#FFD9B8" stroke="none"/><circle cx="72" cy="111" r="8" fill="#FF9AA2" opacity=".55" stroke="none"/><circle cx="128" cy="111" r="8" fill="#FF9AA2" opacity=".55" stroke="none"/></g><g class="z" data-z="hair"><path d="M42 88C30 14 170 14 158 88C150 70 130 60 100 58C70 60 50 70 42 88Z" fill="#8B5A2B"/><path d="M96 33Q100 18 110 26" fill="none"/></g><g class="z" data-z="eye"><ellipse cx="80" cy="94" rx="6.5" ry="8.5" fill="#2B2B2B" stroke="none"/><ellipse cx="120" cy="94" rx="6.5" ry="8.5" fill="#2B2B2B" stroke="none"/><circle cx="82.2" cy="90.5" r="2.6" fill="#fff" stroke="none"/><circle cx="122.2" cy="90.5" r="2.6" fill="#fff" stroke="none"/><circle class="hit" cx="80" cy="94" r="13"/><circle class="hit" cx="120" cy="94" r="13"/></g><g class="z" data-z="nose"><ellipse cx="100" cy="105" rx="4.5" ry="3.5" fill="#F29C80" stroke-width="2"/><circle class="hit" cx="100" cy="105" r="8"/></g><g class="z" data-z="mouth"><path d="M86 116Q100 142 114 116Z" fill="#7A2E3A" stroke-width="2.5"/><ellipse class="hit" cx="100" cy="122" rx="17" ry="11"/></g><g class="z" data-z="tongue"><ellipse cx="100" cy="124" rx="8" ry="4.6" fill="#FF8FA3" stroke="none"/><ellipse class="hit" cx="100" cy="124" rx="9" ry="6"/></g></g></svg>';
+/* labelled avatar: anchor point on the part (ax,ay), label on the left (L) or right (R) at height y */
+var AV_LABELS=[
+  {z:'hair',ax:72,ay:36,s:'L',y:16},{z:'head',ax:50,ay:62,s:'L',y:52},{z:'ear',ax:40,ay:92,s:'L',y:88},
+  {z:'face',ax:68,ay:116,s:'L',y:124},{z:'shoulder',ax:52,ay:162,s:'L',y:160},{z:'arm',ax:46,ay:200,s:'L',y:196},
+  {z:'hand',ax:44,ay:247,s:'L',y:232},{z:'finger',ax:43,ay:266,s:'L',y:268},{z:'knee',ax:80,ay:282,s:'L',y:304},
+  {z:'eye',ax:122,ay:96,s:'R',y:16},{z:'nose',ax:103,ay:105,s:'R',y:52},{z:'mouth',ax:110,ay:118,s:'R',y:88},
+  {z:'tongue',ax:104,ay:125,s:'R',y:124},{z:'neck',ax:110,ay:150,s:'R',y:160},{z:'heart',ax:116,ay:186,s:'R',y:196},
+  {z:'stomach',ax:126,ay:226,s:'R',y:232},{z:'leg',ax:120,ay:300,s:'R',y:268},{z:'foot',ax:132,ay:314,s:'R',y:304}
+];
+function avatarLabeledHTML(){
+  var inner=AV_SVG.replace(/^<svg[^>]*>/,'').replace(/<\/svg>$/,''),lb='',i,a,e,j,L,bx,ex,tx,anc;
+  for(i=0;i<AV_LABELS.length;i++){a=AV_LABELS[i];e=null;for(j=0;j<BODYAV.length;j++)if(BODYAV[j].z===a.z)e=BODYAV[j];if(!e)continue;
+    L=a.s==='L';bx=L?-128:210;ex=L?-10:210;tx=L?-16:216;anc=L?'end':'start';
+    lb+='<g class="lbl" data-z="'+a.z+'"><line x1="'+a.ax+'" y1="'+a.ay+'" x2="'+ex+'" y2="'+(a.y+12)+'"/><circle cx="'+a.ax+'" cy="'+a.ay+'" r="2.6"/>'
+      +'<rect x="'+bx+'" y="'+a.y+'" width="118" height="30" rx="8"/>'
+      +'<text class="lr" x="'+tx+'" y="'+(a.y+14)+'" text-anchor="'+anc+'">'+e.r+'</text><text class="le" x="'+tx+'" y="'+(a.y+25)+'" text-anchor="'+anc+'">'+e.fr+'</text></g>';}
+  return '<svg class="av labeled" viewBox="-132 6 464 334" role="img" aria-label="Avatar with every body part named">'+inner+lb+'</svg>';
+}
 function avatarHTML(cls){return AV_SVG.replace('class="av"','class="av '+(cls||'')+'"');}
 function avZones(root,z){return root.querySelectorAll('.z[data-z="'+z+'"]');}
 function avSet(root,z,cls){if(!z)return;var n=avZones(root,z),i;for(i=0;i<n.length;i++)n[i].setAttribute('class','z '+cls);}
@@ -949,9 +978,9 @@ function openCheat(){
   for(i=0;i<nums.length;i++){rt=readThai(nums[i]);h+=crow(nums[i],rt.r,rt.th);}
   document.getElementById('cheatNum').innerHTML=h;
   document.getElementById('cheatVerb').innerHTML=VERBR.map(function(e){return crow(e.fr,e.r,e.th,'fr');}).join('');
-  document.getElementById('cheatAvatar').innerHTML=avatarHTML('cheat');
-  document.getElementById('cheatAvLabel').textContent='Tap a part to hear it';
-  document.getElementById('cheatBody').innerHTML=BODYR.map(function(e){return crow(e.fr,e.r,e.th,'fr');}).join('');
+  document.getElementById('cheatAvatar').innerHTML=avatarLabeledHTML();
+  document.getElementById('cheatAvLabel').textContent='Tap a part or a label to hear it';
+  document.getElementById('cheatBody').innerHTML=BODYR.filter(function(e){return !e.z;}).map(function(e){return crow(e.fr,e.r,e.th,'fr');}).join('');
   document.getElementById('cheatCol').innerHTML=COLR.map(function(e){return crow((e.c?'<i class="dot" style="background:'+e.c+'"></i>':'')+e.fr,e.r,e.th,'fr');}).join('');
   document.getElementById('cheatBase').innerHTML=BASER.map(function(e){return crow(e.fr,e.r,e.th,'fr');}).join('');
   document.getElementById('cheatPol').innerHTML=POLR.map(function(e){return crow(e.fr,e.r,e.th,'fr');}).join('');
@@ -964,9 +993,10 @@ function closeCheat(){document.getElementById('cheat').classList.remove('up');}
 document.getElementById('cheat').addEventListener('click',function(e){if(e.target===this)closeCheat();});
 /* tapping the avatar in the cheat sheet: show the word and say it */
 document.getElementById('cheatAvatar').addEventListener('click',function(e){
-  var g=e.target.closest?e.target.closest('.z'):null;if(!g)return;
-  var z=g.getAttribute('data-z'),i,en=null;for(i=0;i<BODYAV.length;i++)if(BODYAV[i].z===z)en=BODYAV[i];
+  var g=e.target.closest?(e.target.closest('.z')||e.target.closest('.lbl')):null;if(!g)return;
+  var z=g.getAttribute('data-z'),i,en=null,lbs;for(i=0;i<BODYAV.length;i++)if(BODYAV[i].z===z)en=BODYAV[i];
   if(!en)return;avClear(this);avSet(this,z,'sel');
+  lbs=this.querySelectorAll('.lbl');for(i=0;i<lbs.length;i++)lbs[i].setAttribute('class','lbl'+(lbs[i].getAttribute('data-z')===z?' on':''));
   document.getElementById('cheatAvLabel').textContent=en.r+' — '+en.fr;speakTH(en.th);
 });
 
