@@ -1,5 +1,5 @@
 ﻿/* Parler thaï — service worker (offline) */
-const CACHE = 'thai-pwa-v16';
+const CACHE = 'thai-pwa-v17';
 const ASSETS = [
   './',
   './index.html',
