@@ -129,7 +129,7 @@ button{font-family:inherit;cursor:pointer;}
 .qbody{flex:1;display:flex;flex-direction:column;justify-content:center;gap:16px;min-height:0;overflow:auto;padding:6px 0;}
 .qlabel{font-size:21px;font-weight:800;letter-spacing:-.3px;color:#fff;text-shadow:0 2px 0 rgba(0,0,0,.4);}
 .chip-cat{display:inline-block;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.5px;padding:4px 11px;border-radius:99px;margin-bottom:2px;border:2px solid var(--bark-d);box-shadow:0 2px 0 rgba(0,0,0,.3);color:var(--bark-d);}
-.cat-num{background:#BFE3F5;}.cat-pol{background:#CDEBA0;}.cat-pre{background:#D8C9F0;}.cat-food{background:#F2BFC4;}.cat-neg{background:#F6D199;}.cat-base{background:#A9E3D5;}.cat-verb{background:#F0E6A8;}.cat-body{background:#F7C6E0;}.cat-rev{background:#F3B768;}
+.cat-num{background:#BFE3F5;}.cat-pol{background:#CDEBA0;}.cat-pre{background:#D8C9F0;}.cat-food{background:#F2BFC4;}.cat-neg{background:#F6D199;}.cat-base{background:#A9E3D5;}.cat-verb{background:#F0E6A8;}.cat-body{background:#F7C6E0;}.cat-col{background:#FFD9A0;}.cat-rev{background:#F3B768;}
 
 .prompt{border:30px solid transparent;border-image:url(jungle-assets/panel.png) 70 fill stretch;padding:4px 10px 14px;text-align:center;position:relative;color:var(--ink);}
 .prompt .digit{font-size:72px;font-weight:800;line-height:1;color:var(--bark-d);}
@@ -211,6 +211,18 @@ button{font-family:inherit;cursor:pointer;}
 .rules{background:#FBE6B8;border:2px solid #C99A3A;border-radius:14px;padding:12px 14px;margin-top:8px;}
 .rules li{list-style:none;font-size:14px;font-weight:700;margin:6px 0;line-height:1.35;color:var(--ink);}
 
+/* colours: big swatch to name, or a grid of swatches to tap */
+.swbig{width:120px;height:120px;border-radius:50%;margin:6px auto 4px;border:5px solid var(--bark);box-shadow:inset 0 -8px 0 rgba(0,0,0,.12),0 4px 0 rgba(0,0,0,.25);}
+.swgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.mcopt.swopt{height:86px;margin:0;border-width:4px;position:relative;box-shadow:inset 0 -7px 0 rgba(0,0,0,.12),0 4px 0 rgba(0,0,0,.22);}
+.mcopt.swopt[aria-pressed="true"]{border-color:#1b6fa0;outline:4px solid #7FD0F3;}
+.mcopt.swopt.good{border-color:var(--leaf-d);outline:4px solid #9BD75A;}
+.mcopt.swopt.bad{border-color:#c0392b;outline:4px solid #F7C9C0;}
+.mcopt.swopt.good::after,.mcopt.swopt.bad::after{position:absolute;top:6px;right:8px;width:28px;height:28px;border-radius:50%;background:#fff;border:2px solid var(--bark-d);display:grid;place-items:center;font-size:17px;font-weight:800;}
+.mcopt.swopt.good::after{content:"\2713";color:var(--leaf-d);}
+.mcopt.swopt.bad::after{content:"\2717";color:#c0392b;}
+.crow .dot{display:inline-block;width:14px;height:14px;border-radius:50%;border:2px solid var(--bark);vertical-align:-2px;margin-right:6px;}
+
 @media(prefers-reduced-motion:reduce){*{animation-duration:.001ms!important;transition-duration:.01ms!important;}}
 :focus-visible{outline:3px solid #FFD54A;outline-offset:2px;}
 </style>
@@ -258,6 +270,8 @@ button{font-family:inherit;cursor:pointer;}
           <svg class="ti" viewBox="0 0 24 24"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8Z"/></svg><div class="tn">Verbs</div></button>
         <button class="theme" data-cat="body" aria-pressed="true" onclick="toggleCat('body')">
           <svg class="ti" viewBox="0 0 24 24"><circle cx="12" cy="5" r="2.5"/><path d="M12 8v7M6 11l6-1 6 1M9 21l3-6 3 6"/></svg><div class="tn">Body parts</div></button>
+        <button class="theme" data-cat="col" aria-pressed="true" onclick="toggleCat('col')">
+          <svg class="ti" viewBox="0 0 24 24"><path d="M12 3a9 9 0 0 0 0 18c1.4 0 2-1 2-2 0-1.5-1.5-1.8-1.5-3s1-2 2.5-2H18a3 3 0 0 0 3-3c0-4.4-4-8-9-8Z"/><circle cx="7.5" cy="11" r="1.2"/><circle cx="10.5" cy="7" r="1.2"/><circle cx="15.5" cy="7.5" r="1.2"/></svg><div class="tn">Colours</div></button>
       </div>
     </div>
 
@@ -345,6 +359,13 @@ button{font-family:inherit;cursor:pointer;}
   <ul class="rules">
     <li>★ <b>ขา khǎa</b> covers the whole leg; <b>เท้า tháo</b> is the foot itself</li>
     <li>★ <b>หัวใจ hǔa-jai</b> (heart) is built on <b>หัว hǔa</b> (head)</li>
+  </ul>
+  <h4>Colours</h4>
+  <div id="cheatCol"></div>
+  <ul class="rules">
+    <li>★ <b>สี sǐi</b> = colour; say it before the colour name → <b>sǐi daeng</b> (red)</li>
+    <li>★ The colour comes <b>after</b> the thing → <b>sûea sǐi daeng</b> (a red shirt)</li>
+    <li>★ <b>เข้ม khêm</b> = dark, <b>อ่อน àawn</b> = light, placed after the colour</li>
   </ul>
   <h4>Basic sentences</h4>
   <div id="cheatBase"></div>
@@ -537,6 +558,29 @@ var BODY=[
   {fr:'heart',z:'heart',th:'หัวใจ',r:'hǔa-jai'},
   {fr:'skin',th:'ผิว',r:'phǐu'}
 ];
+/* colours: c = swatch shown in the visual exercises; entries without c are sentences */
+var COL=[
+  {fr:'red',c:'#E0322B',th:'สีแดง',r:'sǐi daeng'},
+  {fr:'green',c:'#3FA535',th:'สีเขียว',r:'sǐi khǐaw'},
+  {fr:'blue',c:'#1F4FB5',th:'สีน้ำเงิน',r:'sǐi nám-ngern'},
+  {fr:'light blue',c:'#7CC6F2',th:'สีฟ้า',r:'sǐi fáa'},
+  {fr:'yellow',c:'#FFD21F',th:'สีเหลือง',r:'sǐi lǔeang'},
+  {fr:'orange',c:'#F7881F',th:'สีส้ม',r:'sǐi sôm'},
+  {fr:'pink',c:'#F59AC0',th:'สีชมพู',r:'sǐi chom-phuu'},
+  {fr:'purple',c:'#8A4FBF',th:'สีม่วง',r:'sǐi mûang'},
+  {fr:'brown',c:'#8B5A2B',th:'สีน้ำตาล',r:'sǐi nám-taan'},
+  {fr:'black',c:'#222222',th:'สีดำ',r:'sǐi dam'},
+  {fr:'white',c:'#FFFFFF',th:'สีขาว',r:'sǐi khǎao'},
+  {fr:'grey',c:'#9A9A9A',th:'สีเทา',r:'sǐi thao'},
+  {fr:'gold',c:'#D4A017',th:'สีทอง',r:'sǐi thaawng'},
+  {fr:'What colour?',th:'สีอะไร{p}',r:'sǐi à-rai {pr}'},
+  {fr:'I like red',th:'{i}ชอบสีแดง',r:'{ir} châawp sǐi daeng'},
+  {fr:'A red shirt',th:'เสื้อสีแดง',r:'sûea sǐi daeng'},
+  {fr:'A black car',th:'รถสีดำ',r:'rót sǐi dam'},
+  {fr:'Do you have it in white?',th:'มีสีขาวไหม{p}',r:'mii sǐi khǎao mǎi {pr}'},
+  {fr:'Dark green',th:'สีเขียวเข้ม',r:'sǐi khǐaw khêm'},
+  {fr:'Light pink',th:'สีชมพูอ่อน',r:'sǐi chom-phuu àawn'}
+];
 var POLR=POL.map(function(e){return{fr:e.fr,th:resolve(e.th),r:resolve(e.r)};});
 var PRER=PRE.map(function(e){return{fr:e.fr,th:resolve(e.th),r:resolve(e.r)};});
 var FOODR=FOOD.map(function(e){return{fr:e.fr,th:resolve(e.th),r:resolve(e.r)};});
@@ -544,7 +588,8 @@ var NEGR=NEG.map(function(e){return{fr:e.fr,th:resolve(e.th),r:resolve(e.r)};});
 var BASER=BASE.map(function(e){return{fr:e.fr,th:resolve(e.th),r:resolve(e.r)};});
 var VERBR=VERB.map(function(e){return{fr:e.fr,th:resolve(e.th),r:resolve(e.r)};});
 var BODYR=BODY.map(function(e){return{fr:e.fr,th:resolve(e.th),r:resolve(e.r),z:e.z};});
-var WORDPOOL=(function(){var w={},all=POLR.concat(PRER,FOODR,NEGR,BASER,VERBR,BODYR);all.forEach(function(e){e.r.split(/\s+/).forEach(function(x){if(x)w[x]=1;});});return Object.keys(w);})();
+var COLR=COL.map(function(e){return{fr:e.fr,th:resolve(e.th),r:resolve(e.r),c:e.c};});
+var WORDPOOL=(function(){var w={},all=POLR.concat(PRER,FOODR,NEGR,BASER,VERBR,BODYR,COLR);all.forEach(function(e){e.r.split(/\s+/).forEach(function(x){if(x)w[x]=1;});});return Object.keys(w);})();
 var FRPOOL=POLR.concat(PRER,FOODR,NEGR,BASER).map(function(e){return e.fr;});
 /* dedicated pools: a lone verb must be matched against other verbs, not against sentences */
 var VERBWORDS=VERBR.map(function(e){return e.r;});
@@ -552,6 +597,12 @@ var VERBFR=VERBR.map(function(e){return e.fr;});
 /* body parts that exist on the avatar (back and skin can't be shown from the front) */
 var BODYAV=BODYR.filter(function(e){return e.z;});
 var BODYAVROM=BODYAV.map(function(e){return e.r;});
+/* colour swatches vs colour sentences; sentence distractors come from the colour theme only */
+var COLSW=COLR.filter(function(e){return e.c;});
+var COLSWROM=COLSW.map(function(e){return e.r;});
+var COLSENT=COLR.filter(function(e){return !e.c;});
+var COLWORDS=(function(){var w={};COLR.forEach(function(e){e.r.split(/\s+/).forEach(function(x){if(x)w[x]=1;});});return Object.keys(w);})();
+var COLFR=COLR.map(function(e){return e.fr;});
 
 /* ===== cute avatar for the body parts section ===== */
 var AV_SVG='<svg class="av" viewBox="0 0 200 330" role="img" aria-label="Avatar"><g stroke="#5A3B1E" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"><g class="z" data-z="neck"><rect x="87" y="134" width="26" height="28" rx="7" fill="#FFD9B8"/></g><g class="z" data-z="leg"><rect x="71" y="254" width="24" height="54" rx="10" fill="#FFD9B8"/><rect x="105" y="254" width="24" height="54" rx="10" fill="#FFD9B8"/></g><g class="z" data-z="knee"><ellipse cx="83" cy="280" rx="10" ry="9" fill="#FFC49C"/><ellipse cx="117" cy="280" rx="10" ry="9" fill="#FFC49C"/><circle class="hit" cx="83" cy="280" r="14"/><circle class="hit" cx="117" cy="280" r="14"/></g><g class="z" data-z="foot"><ellipse cx="76" cy="313" rx="19" ry="10" fill="#E4572E"/><ellipse cx="124" cy="313" rx="19" ry="10" fill="#E4572E"/></g><g class="z" data-z="arm"><rect x="40" y="174" width="20" height="66" rx="10" fill="#FFD9B8"/><rect x="140" y="174" width="20" height="66" rx="10" fill="#FFD9B8"/></g><g class="z" data-z="stomach"><rect x="66" y="208" width="68" height="32" rx="9" fill="#FFD9B8"/><circle cx="100" cy="226" r="2.2" fill="#5A3B1E" stroke="none"/></g><rect x="62" y="154" width="76" height="60" rx="16" fill="#5BA82A"/><rect x="64" y="236" width="72" height="26" rx="9" fill="#4A78B8"/><g class="z" data-z="shoulder"><circle cx="58" cy="166" r="14" fill="#5BA82A"/><circle cx="142" cy="166" r="14" fill="#5BA82A"/></g><g class="z" data-z="hand"><circle cx="50" cy="247" r="11" fill="#FFD9B8"/><circle cx="150" cy="247" r="11" fill="#FFD9B8"/></g><g class="z" data-z="finger"><ellipse cx="43" cy="262" rx="3.4" ry="6.5" fill="#FFD9B8" stroke-width="2.2"/><ellipse cx="50" cy="264" rx="3.4" ry="7" fill="#FFD9B8" stroke-width="2.2"/><ellipse cx="57" cy="262" rx="3.4" ry="6.5" fill="#FFD9B8" stroke-width="2.2"/><ellipse cx="143" cy="262" rx="3.4" ry="6.5" fill="#FFD9B8" stroke-width="2.2"/><ellipse cx="150" cy="264" rx="3.4" ry="7" fill="#FFD9B8" stroke-width="2.2"/><ellipse cx="157" cy="262" rx="3.4" ry="6.5" fill="#FFD9B8" stroke-width="2.2"/><ellipse class="hit" cx="50" cy="262" rx="14" ry="10"/><ellipse class="hit" cx="150" cy="262" rx="14" ry="10"/></g><g class="z" data-z="heart"><path d="M112 197C99 186 101 174 109 175C112 175 112 178 112 179C112 178 112 175 115 175C123 174 125 186 112 197Z" fill="#FF5A7A" stroke-width="2.4"/><circle class="hit" cx="112" cy="185" r="13"/></g><g class="z" data-z="ear"><ellipse cx="43" cy="92" rx="10" ry="13" fill="#FFD9B8"/><ellipse cx="157" cy="92" rx="10" ry="13" fill="#FFD9B8"/><ellipse cx="43" cy="93" rx="4" ry="6.5" fill="#FF9AA2" stroke="none"/><ellipse cx="157" cy="93" rx="4" ry="6.5" fill="#FF9AA2" stroke="none"/><circle class="hit" cx="43" cy="92" r="15"/><circle class="hit" cx="157" cy="92" r="15"/></g><g class="z" data-z="head"><circle cx="100" cy="88" r="56" fill="#FFD9B8"/></g><g class="z" data-z="face"><ellipse cx="100" cy="102" rx="42" ry="36" fill="#FFD9B8" stroke="none"/><circle cx="72" cy="111" r="8" fill="#FF9AA2" opacity=".55" stroke="none"/><circle cx="128" cy="111" r="8" fill="#FF9AA2" opacity=".55" stroke="none"/></g><g class="z" data-z="hair"><path d="M42 88C30 14 170 14 158 88C150 70 130 60 100 58C70 60 50 70 42 88Z" fill="#8B5A2B"/><path d="M96 33Q100 18 110 26" fill="none"/></g><g class="z" data-z="eye"><ellipse cx="80" cy="94" rx="6.5" ry="8.5" fill="#2B2B2B" stroke="none"/><ellipse cx="120" cy="94" rx="6.5" ry="8.5" fill="#2B2B2B" stroke="none"/><circle cx="82.2" cy="90.5" r="2.6" fill="#fff" stroke="none"/><circle cx="122.2" cy="90.5" r="2.6" fill="#fff" stroke="none"/><circle class="hit" cx="80" cy="94" r="13"/><circle class="hit" cx="120" cy="94" r="13"/></g><g class="z" data-z="nose"><ellipse cx="100" cy="105" rx="4.5" ry="3.5" fill="#F29C80" stroke-width="2"/><circle class="hit" cx="100" cy="105" r="8"/></g><g class="z" data-z="mouth"><path d="M86 116Q100 142 114 116Z" fill="#7A2E3A" stroke-width="2.5"/><ellipse class="hit" cx="100" cy="122" rx="17" ry="11"/></g><g class="z" data-z="tongue"><ellipse cx="100" cy="124" rx="8" ry="4.6" fill="#FF8FA3" stroke="none"/><ellipse class="hit" cx="100" cy="124" rx="9" ry="6"/></g></g></svg>';
@@ -566,7 +617,7 @@ function shuffle(arr){var a=arr.slice(),i,j,t;for(i=a.length-1;i>0;i--){j=Math.f
 function pickN(pool,k,exclude){var ex={};(exclude||[]).forEach(function(x){ex[norm(x)]=1;});var src=shuffle(pool),out=[],i;for(i=0;i<src.length&&out.length<k;i++){if(!ex[norm(src[i])]){out.push(src[i]);ex[norm(src[i])]=1;}}return out;}
 
 /* ===== state ===== */
-var cats={num:true,pol:true,pre:true,neg:true,food:true,base:true,verb:true,body:true};
+var cats={num:true,pol:true,pre:true,neg:true,food:true,base:true,verb:true,body:true,col:true};
 var REVIEW_MAX=3; /* max mistakes replayed at the end of a round */
 var DIFFS=[{id:'deb',t:'0–10',min:0,max:10},{id:'fac',t:'0–20',min:0,max:20},{id:'moy',t:'0–100',min:0,max:100},{id:'prix',t:'Prices',min:0,max:1000}];
 var curDiff='deb';
@@ -625,11 +676,12 @@ function renderCombo(id,gained){
 /* ===== question makers ===== */
 function makeNum(){var d=diffObj(),n=rint(d.min,d.max),rt=readThai(n);return{cat:'num',type:Math.random()<.5?'d2w':'w2d',n:n,th:rt.th,rom:rt.r};}
 function makePhrase(cat,used){
-  var pool=({pol:POLR,pre:PRER,food:FOODR,neg:NEGR,base:BASER,verb:VERBR})[cat]||POLR,e,tries=0;
+  var pool=({pol:POLR,pre:PRER,food:FOODR,neg:NEGR,base:BASER,verb:VERBR,col:COLSENT})[cat]||POLR,e,tries=0;
   do{e=pool[rint(0,pool.length-1)];tries++;}while(used[e.fr]&&tries<20);used[e.fr]=1;
   var type=Math.random()<.5?'bank':'mc';
   var wpool=WORDPOOL,fpool=FRPOOL;
   if(cat==='verb'){wpool=VERBWORDS;fpool=VERBFR;}
+  if(cat==='col'){wpool=COLWORDS;fpool=COLFR;}
   if(type==='bank'){
     var words=e.r.split(/\s+/).filter(Boolean);
     var dist=pickN(wpool,Math.min(3,Math.max(2,4-words.length+2)),words);
@@ -648,10 +700,23 @@ function makeBody(used){
   var opts=[{fr:e.r,correct:true}];pickN(BODYAVROM,3,[e.r]).forEach(function(o){opts.push({fr:o,correct:false});});
   return{cat:'body',type:'bname',fr:e.fr,th:e.th,rom:e.r,target:e.z,options:shuffle(opts),sel:null};
 }
+/* colours: name the swatch (cname), tap the swatch for a word (ctap), or a colour sentence (1 in 4) */
+function makeColor(used){
+  if(Math.random()<.25)return makePhrase('col',used);
+  var e,tries=0;
+  do{e=COLSW[rint(0,COLSW.length-1)];tries++;}while(used[e.fr]&&tries<20);used[e.fr]=1;
+  if(Math.random()<.5){
+    var o1=[{fr:e.r,correct:true}];pickN(COLSWROM,3,[e.r]).forEach(function(x){o1.push({fr:x,correct:false});});
+    return{cat:'col',type:'cname',fr:e.fr,th:e.th,rom:e.r,c:e.c,options:shuffle(o1),sel:null};
+  }
+  var o2=[{fr:e.fr,c:e.c,correct:true}];
+  shuffle(COLSW).filter(function(x){return x.fr!==e.fr;}).slice(0,3).forEach(function(x){o2.push({fr:x.fr,c:x.c,correct:false});});
+  return{cat:'col',type:'ctap',fr:e.fr,th:e.th,rom:e.r,c:e.c,options:shuffle(o2),sel:null};
+}
 function btapOK(it){return it.sel===it.target||(it.target==='head'&&it.sel==='hair');}
 function buildItems(){
-  var sel=[];['num','pol','pre','neg','food','base','verb','body'].forEach(function(k){if(cats[k])sel.push(k);});if(!sel.length)sel=['num'];
-  var items=[],used={},i,c;for(i=0;i<10;i++){c=sel[rint(0,sel.length-1)];items.push(c==='num'?makeNum():(c==='body'?makeBody(used):makePhrase(c,used)));}
+  var sel=[];['num','pol','pre','neg','food','base','verb','body','col'].forEach(function(k){if(cats[k])sel.push(k);});if(!sel.length)sel=['num'];
+  var items=[],used={},i,c;for(i=0;i<10;i++){c=sel[rint(0,sel.length-1)];items.push(c==='num'?makeNum():c==='body'?makeBody(used):c==='col'?makeColor(used):makePhrase(c,used));}
   return items;
 }
 
@@ -660,10 +725,10 @@ function show(id){['home','quiz','end'].forEach(function(s){document.getElementB
 function start(){Q={items:buildItems(),idx:0,score:0,streak:0,best:0,checked:false,curOK:false,phase:'main',wrong:[],review:[],reviewTotal:0};show('quiz');render();}
 function goHome(){if(window.speechSynthesis)speechSynthesis.cancel();closeSheet();renderHome();show('home');}
 function curItem(){return Q.phase==='review'?Q.review[0]:Q.items[Q.idx];}
-function resetItem(it){if(it.type==='bank'){it.bank.forEach(function(t){t.used=false;});it.placed=[];it.bank=shuffle(it.bank);}else if(it.type==='mc'||it.type==='bname'){it.sel=null;it.options=shuffle(it.options);}else if(it.type==='btap'){it.sel=null;}return it;}
+function resetItem(it){if(it.type==='bank'){it.bank.forEach(function(t){t.used=false;});it.placed=[];it.bank=shuffle(it.bank);}else if(it.type==='mc'||it.type==='bname'||it.type==='cname'||it.type==='ctap'){it.sel=null;it.options=shuffle(it.options);}else if(it.type==='btap'){it.sel=null;}return it;}
 function enterReview(){Q.phase='review';Q.review=Q.wrong.slice(0,REVIEW_MAX);Q.review.forEach(resetItem);Q.reviewTotal=Q.review.length;render();}
 
-var CATNAME={num:['cat-num','Numbers'],pol:['cat-pol','Politeness'],pre:['cat-pre','Introductions'],neg:['cat-neg','Bargaining'],food:['cat-food','Eating'],base:['cat-base','Basic sentences'],verb:['cat-verb','Verbs'],body:['cat-body','Body parts']};
+var CATNAME={num:['cat-num','Numbers'],pol:['cat-pol','Politeness'],pre:['cat-pre','Introductions'],neg:['cat-neg','Bargaining'],food:['cat-food','Eating'],base:['cat-base','Basic sentences'],verb:['cat-verb','Verbs'],body:['cat-body','Body parts'],col:['cat-col','Colours']};
 function render(){
   Q.checked=false;var it=curItem();
   var bar=document.getElementById('bar');
@@ -704,6 +769,16 @@ function render(){
     prompt.innerHTML=avatarHTML('fixed');avSet(prompt,it.target,'hl');
     var mcb=document.getElementById('mcWrap');mcb.classList.remove('hide');
     mcb.innerHTML=it.options.map(function(o,i){return '<button class="mcopt" data-i="'+i+'" aria-pressed="false" onclick="selectMC('+i+')">'+o.fr+'</button>';}).join('');
+  }else if(it.type==='cname'){
+    document.getElementById('qlabel').textContent='What colour is this?';
+    prompt.innerHTML='<div class="swbig" style="background:'+it.c+'"></div>';
+    var mcc=document.getElementById('mcWrap');mcc.classList.remove('hide');
+    mcc.innerHTML=it.options.map(function(o,i){return '<button class="mcopt" data-i="'+i+'" aria-pressed="false" onclick="selectMC('+i+')">'+o.fr+'</button>';}).join('');
+  }else if(it.type==='ctap'){
+    document.getElementById('qlabel').textContent='Tap the colour';
+    prompt.innerHTML='<div class="word">'+it.rom+'</div>'+listenBtn(it.th);
+    var mct=document.getElementById('mcWrap');mct.classList.remove('hide');
+    mct.innerHTML='<div class="swgrid">'+it.options.map(function(o,i){return '<button class="mcopt swopt" data-i="'+i+'" aria-pressed="false" aria-label="Colour '+(i+1)+'" style="background:'+o.c+'" onclick="selectMC('+i+')"></button>';}).join('')+'</div>';
   }else{
     document.getElementById('qlabel').textContent='What does it mean?';
     prompt.innerHTML='<div class="word">'+it.rom+'</div>'+listenBtn(it.th);
@@ -766,7 +841,7 @@ function avMark(it,ok){
   avSet(p,it.target,'good');
 }
 function markMC(it){document.querySelectorAll('#mcWrap .mcopt').forEach(function(b){var i=+b.getAttribute('data-i');if(it.options[i].correct)b.classList.add('good');else if(i===it.sel)b.classList.add('bad');});}
-function skip(){if(Q.checked)return;var it=curItem();Q.checked=true;Q.curOK=false;Q.streak=0;SFX.play('bad');if(it.type==='mc'||it.type==='bname')markMC(it);if(it.type==='btap'||it.type==='bname')avMark(it,false);if(it.type==='d2w'||it.type==='w2d')document.getElementById('answerWrap').className='answer no';speakTH(it.th);openSheet(false,it);}
+function skip(){if(Q.checked)return;var it=curItem();Q.checked=true;Q.curOK=false;Q.streak=0;SFX.play('bad');if(it.type==='mc'||it.type==='bname'||it.type==='cname'||it.type==='ctap')markMC(it);if(it.type==='btap'||it.type==='bname')avMark(it,false);if(it.type==='d2w'||it.type==='w2d')document.getElementById('answerWrap').className='answer no';speakTH(it.th);openSheet(false,it);}
 
 function openSheet(ok,it){
   lastTH=it.th;var sh=document.getElementById('sheet');sh.className='sheet '+(ok?'good':'bad');
@@ -877,6 +952,7 @@ function openCheat(){
   document.getElementById('cheatAvatar').innerHTML=avatarHTML('cheat');
   document.getElementById('cheatAvLabel').textContent='Tap a part to hear it';
   document.getElementById('cheatBody').innerHTML=BODYR.map(function(e){return crow(e.fr,e.r,e.th,'fr');}).join('');
+  document.getElementById('cheatCol').innerHTML=COLR.map(function(e){return crow((e.c?'<i class="dot" style="background:'+e.c+'"></i>':'')+e.fr,e.r,e.th,'fr');}).join('');
   document.getElementById('cheatBase').innerHTML=BASER.map(function(e){return crow(e.fr,e.r,e.th,'fr');}).join('');
   document.getElementById('cheatPol').innerHTML=POLR.map(function(e){return crow(e.fr,e.r,e.th,'fr');}).join('');
   document.getElementById('cheatPre').innerHTML=PRER.map(function(e){return crow(e.fr,e.r,e.th,'fr');}).join('');
