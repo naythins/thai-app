@@ -76,6 +76,10 @@ button{font-family:inherit;cursor:pointer;}
 .av .z.bad>*:not(.hit){stroke:#e0402a;stroke-width:5;}
 .av .z.hl>*:not(.hit){stroke:#ffb300;animation:avpulse .9s ease-in-out infinite;}
 @keyframes avpulse{0%,100%{stroke-width:3.5}50%{stroke-width:8}}
+/* arrow pointing at the asked body part */
+.av .arw path{fill:#FFC107;stroke:#3E2813;stroke-width:3;stroke-linejoin:round;}
+.av .arw{animation:arwbob .8s ease-in-out infinite;}
+@keyframes arwbob{0%,100%{transform:translateX(5px)}50%{transform:translateX(15px)}}
 .prompt.avp{border-width:16px;padding:0 2px 4px;}
 .avword{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:4px;}
 .avword .word{font-size:34px;}
@@ -606,6 +610,16 @@ var COLFR=COLR.map(function(e){return e.fr;});
 
 /* ===== cute avatar for the body parts section ===== */
 var AV_SVG='<svg class="av" viewBox="0 0 200 330" role="img" aria-label="Avatar"><g stroke="#5A3B1E" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"><g class="z" data-z="neck"><rect x="87" y="134" width="26" height="28" rx="7" fill="#FFD9B8"/></g><g class="z" data-z="leg"><rect x="71" y="254" width="24" height="54" rx="10" fill="#FFD9B8"/><rect x="105" y="254" width="24" height="54" rx="10" fill="#FFD9B8"/></g><g class="z" data-z="knee"><ellipse cx="83" cy="280" rx="10" ry="9" fill="#FFC49C"/><ellipse cx="117" cy="280" rx="10" ry="9" fill="#FFC49C"/><circle class="hit" cx="83" cy="280" r="14"/><circle class="hit" cx="117" cy="280" r="14"/></g><g class="z" data-z="foot"><ellipse cx="76" cy="313" rx="19" ry="10" fill="#E4572E"/><ellipse cx="124" cy="313" rx="19" ry="10" fill="#E4572E"/></g><g class="z" data-z="arm"><rect x="40" y="174" width="20" height="66" rx="10" fill="#FFD9B8"/><rect x="140" y="174" width="20" height="66" rx="10" fill="#FFD9B8"/></g><g class="z" data-z="stomach"><rect x="66" y="208" width="68" height="32" rx="9" fill="#FFD9B8"/><circle cx="100" cy="226" r="2.2" fill="#5A3B1E" stroke="none"/></g><rect x="62" y="154" width="76" height="60" rx="16" fill="#5BA82A"/><rect x="64" y="236" width="72" height="26" rx="9" fill="#4A78B8"/><g class="z" data-z="shoulder"><circle cx="58" cy="166" r="14" fill="#5BA82A"/><circle cx="142" cy="166" r="14" fill="#5BA82A"/></g><g class="z" data-z="hand"><circle cx="50" cy="247" r="11" fill="#FFD9B8"/><circle cx="150" cy="247" r="11" fill="#FFD9B8"/></g><g class="z" data-z="finger"><ellipse cx="43" cy="262" rx="3.4" ry="6.5" fill="#FFD9B8" stroke-width="2.2"/><ellipse cx="50" cy="264" rx="3.4" ry="7" fill="#FFD9B8" stroke-width="2.2"/><ellipse cx="57" cy="262" rx="3.4" ry="6.5" fill="#FFD9B8" stroke-width="2.2"/><ellipse cx="143" cy="262" rx="3.4" ry="6.5" fill="#FFD9B8" stroke-width="2.2"/><ellipse cx="150" cy="264" rx="3.4" ry="7" fill="#FFD9B8" stroke-width="2.2"/><ellipse cx="157" cy="262" rx="3.4" ry="6.5" fill="#FFD9B8" stroke-width="2.2"/><ellipse class="hit" cx="50" cy="262" rx="14" ry="10"/><ellipse class="hit" cx="150" cy="262" rx="14" ry="10"/></g><g class="z" data-z="heart"><path d="M112 197C99 186 101 174 109 175C112 175 112 178 112 179C112 178 112 175 115 175C123 174 125 186 112 197Z" fill="#FF5A7A" stroke-width="2.4"/><circle class="hit" cx="112" cy="185" r="13"/></g><g class="z" data-z="ear"><ellipse cx="43" cy="92" rx="10" ry="13" fill="#FFD9B8"/><ellipse cx="157" cy="92" rx="10" ry="13" fill="#FFD9B8"/><ellipse cx="43" cy="93" rx="4" ry="6.5" fill="#FF9AA2" stroke="none"/><ellipse cx="157" cy="93" rx="4" ry="6.5" fill="#FF9AA2" stroke="none"/><circle class="hit" cx="43" cy="92" r="15"/><circle class="hit" cx="157" cy="92" r="15"/></g><g class="z" data-z="head"><circle cx="100" cy="88" r="56" fill="#FFD9B8"/></g><g class="z" data-z="face"><ellipse cx="100" cy="102" rx="42" ry="36" fill="#FFD9B8" stroke="none"/><circle cx="72" cy="111" r="8" fill="#FF9AA2" opacity=".55" stroke="none"/><circle cx="128" cy="111" r="8" fill="#FF9AA2" opacity=".55" stroke="none"/></g><g class="z" data-z="hair"><path d="M42 88C30 14 170 14 158 88C150 70 130 60 100 58C70 60 50 70 42 88Z" fill="#8B5A2B"/><path d="M96 33Q100 18 110 26" fill="none"/></g><g class="z" data-z="eye"><ellipse cx="80" cy="94" rx="6.5" ry="8.5" fill="#2B2B2B" stroke="none"/><ellipse cx="120" cy="94" rx="6.5" ry="8.5" fill="#2B2B2B" stroke="none"/><circle cx="82.2" cy="90.5" r="2.6" fill="#fff" stroke="none"/><circle cx="122.2" cy="90.5" r="2.6" fill="#fff" stroke="none"/><circle class="hit" cx="80" cy="94" r="13"/><circle class="hit" cx="120" cy="94" r="13"/></g><g class="z" data-z="nose"><ellipse cx="100" cy="105" rx="4.5" ry="3.5" fill="#F29C80" stroke-width="2"/><circle class="hit" cx="100" cy="105" r="8"/></g><g class="z" data-z="mouth"><path d="M86 116Q100 142 114 116Z" fill="#7A2E3A" stroke-width="2.5"/><ellipse class="hit" cx="100" cy="122" rx="17" ry="11"/></g><g class="z" data-z="tongue"><ellipse cx="100" cy="124" rx="8" ry="4.6" fill="#FF8FA3" stroke="none"/><ellipse class="hit" cx="100" cy="124" rx="9" ry="6"/></g></g></svg>';
+/* where the arrow points for each part; parts left of centre get the arrow from the left */
+var AV_PT={hair:[70,38],head:[47,64],ear:[34,92],face:[66,118],shoulder:[46,160],arm:[40,205],hand:[39,247],finger:[40,268],knee:[73,280],
+  eye:[127,94],nose:[105,106],mouth:[113,119],tongue:[108,125],neck:[114,148],heart:[124,186],stomach:[134,226],leg:[129,296],foot:[143,314]};
+function avArrow(root,z){
+  var pt=AV_PT[z],svg=root.querySelector('svg.av');if(!pt||!svg)return;
+  var ang=pt[0]<100?205:-25,g=document.createElementNS('http://www.w3.org/2000/svg','g');
+  g.setAttribute('transform','translate('+pt[0]+' '+pt[1]+') rotate('+ang+') scale(1.25)');g.setAttribute('class','arwg');
+  g.innerHTML='<g class="arw"><path d="M0 0L20-15L20-6L58-6L58 6L20 6L20 15Z"/></g>';
+  svg.appendChild(g);
+}
 function avatarHTML(cls){return AV_SVG.replace('class="av"','class="av '+(cls||'')+'"');}
 function avZones(root,z){return root.querySelectorAll('.z[data-z="'+z+'"]');}
 function avSet(root,z,cls){if(!z)return;var n=avZones(root,z),i;for(i=0;i<n.length;i++)n[i].setAttribute('class','z '+cls);}
@@ -766,7 +780,7 @@ function render(){
     hint.textContent='tap the part on the avatar, then check';
   }else if(it.type==='bname'){
     document.getElementById('qlabel').textContent='What is this in Thai?';
-    prompt.innerHTML=avatarHTML('fixed');avSet(prompt,it.target,'hl');
+    prompt.innerHTML=avatarHTML('fixed');avSet(prompt,it.target,'hl');avArrow(prompt,it.target);
     var mcb=document.getElementById('mcWrap');mcb.classList.remove('hide');
     mcb.innerHTML=it.options.map(function(o,i){return '<button class="mcopt" data-i="'+i+'" aria-pressed="false" onclick="selectMC('+i+')">'+o.fr+'</button>';}).join('');
   }else if(it.type==='cname'){
@@ -839,6 +853,7 @@ function avMark(it,ok){
   var p=document.getElementById('prompt');avClear(p);
   if(it.type==='btap'&&it.sel&&!ok)avSet(p,it.sel,'bad');
   avSet(p,it.target,'good');
+  if(it.type==='btap'&&!ok&&!p.querySelector('.arwg'))avArrow(p,it.target);
 }
 function markMC(it){document.querySelectorAll('#mcWrap .mcopt').forEach(function(b){var i=+b.getAttribute('data-i');if(it.options[i].correct)b.classList.add('good');else if(i===it.sel)b.classList.add('bad');});}
 function skip(){if(Q.checked)return;var it=curItem();Q.checked=true;Q.curOK=false;Q.streak=0;SFX.play('bad');if(it.type==='mc'||it.type==='bname'||it.type==='cname'||it.type==='ctap')markMC(it);if(it.type==='btap'||it.type==='bname')avMark(it,false);if(it.type==='d2w'||it.type==='w2d')document.getElementById('answerWrap').className='answer no';speakTH(it.th);openSheet(false,it);}
